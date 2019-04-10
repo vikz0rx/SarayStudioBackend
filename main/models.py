@@ -38,10 +38,10 @@ class UserManager(BaseUserManager):
         return user
 
 class User(AbstractBaseUser, PermissionsMixin, TimestampedModel):
-    username = models.CharField(db_index=True, max_length=255, unique=True)
-    email = models.EmailField(db_index=True, unique=True)
-    is_active = models.BooleanField(default=True)
-    is_staff = models.BooleanField(default=False)
+    username = models.CharField(db_index=True, max_length=255, unique=True, verbose_name='Имя пользователя')
+    email = models.EmailField(db_index=True, unique=True, verbose_name='Электронная почта')
+    is_active = models.BooleanField(default=True, verbose_name='Активный аккаунт')
+    is_staff = models.BooleanField(default=False, verbose_name='Административный аккаунт')
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username']
@@ -71,17 +71,25 @@ class User(AbstractBaseUser, PermissionsMixin, TimestampedModel):
 
         return token.decode('utf-8')
 
+    class Meta:
+        verbose_name = 'Менеджер'
+        verbose_name_plural = 'Менеджеры'
+
 class Profile(TimestampedModel):
-    user = models.OneToOneField('User', on_delete=models.CASCADE)
-    firstname = models.CharField(max_length=32, blank=True, null=True)
-    lastname = models.CharField(max_length=32, blank=True, null=True)
-    middlename = models.CharField(max_length=32, blank=True, null=True)
-    birthdate = models.DateField(blank=True, null=True)
-    p_series = models.CharField(max_length=4, blank=True, null=True)
-    p_number = models.CharField(max_length=6, blank=True, null=True)
-    insurance = models.CharField(max_length=11, blank=True, null=True)
-    sms_notification = models.BooleanField(default=True)
-    email_notification = models.BooleanField(default=False)
+    user = models.OneToOneField('User', on_delete=models.CASCADE, verbose_name='Пользователь')
+    firstname = models.CharField(max_length=32, blank=True, null=True, verbose_name='Имя')
+    lastname = models.CharField(max_length=32, blank=True, null=True, verbose_name='Фамилия')
+    middlename = models.CharField(max_length=32, blank=True, null=True, verbose_name='Отчество')
+    birthdate = models.DateField(blank=True, null=True, verbose_name='Дата рождения')
+    p_series = models.CharField(max_length=4, blank=True, null=True, verbose_name='Паспорт / Серия')
+    p_number = models.CharField(max_length=6, blank=True, null=True, verbose_name='Паспорт / Номер')
+    insurance = models.CharField(max_length=11, blank=True, null=True, verbose_name='СНИЛС')
+    sms_notification = models.BooleanField(default=True, verbose_name='Оповещение по SMS')
+    email_notification = models.BooleanField(default=False, verbose_name='Оповещение по почте')
 
     def __str__(self):
         return self.user.username
+
+    class Meta:
+        verbose_name = 'Пользователь'
+        verbose_name_plural = 'Пользователи'

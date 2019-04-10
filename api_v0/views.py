@@ -25,8 +25,15 @@ class UserRetrieveUpdateAPIView(RetrieveUpdateAPIView):
             'username': user_data.get('username', request.user.username),
             'email': user_data.get('email', request.user.email),
             'profile': {
-                'bio': user_data.get('bio', request.user.profile.bio),
-                'image': user_data.get('image', request.user.profile.image)
+                'firstname': user_data.get('firstname', request.user.profile.firstname),
+                'lastname': user_data.get('lastname', request.user.profile.lastname),
+                'middlename': user_data.get('middlename', request.user.profile.middlename),
+                'birthdate': user_data.get('birthdate', request.user.profile.birthdate),
+                'p_series': user_data.get('p_series', request.user.profile.p_series),
+                'p_number': user_data.get('p_number', request.user.profile.p_number),
+                'insurance': user_data.get('insurance', request.user.profile.insurance),
+                'sms_notification': user_data.get('sms_notification', request.user.profile.sms_notification),
+                'email_notification': user_data.get('email_notification', request.user.profile.email_notification)
             }
         }
 

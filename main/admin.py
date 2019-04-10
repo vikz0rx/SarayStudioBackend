@@ -13,7 +13,7 @@ class ProfileAdmin(admin.ModelAdmin):
 
         if obj:
             if request.user != obj.user:
-                readonly_fields += ('user', 'firstname', 'lastname', 'middlename', 'birthdate', 'p_series', 'p_number', 'insurance', 'sms_notification', 'email_notification' )
+                readonly_fields += ('user', 'firstname', 'lastname', 'middlename', 'birthdate', 'p_series', 'p_number', 'insurance', 'sms_notification', 'email_notification', )
 
         return readonly_fields
 

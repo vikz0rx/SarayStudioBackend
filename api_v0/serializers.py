@@ -5,11 +5,10 @@ from main.models import *
 
 class ProfileSerializer(serializers.ModelSerializer):
     username = serializers.CharField(source='user.username')
-    bio = serializers.CharField(allow_blank=True, required=False)
 
     class Meta:
         model = Profile
-        fields = ('username', 'bio', )
+        fields = ('username', 'firstname', 'lastname', 'middlename', 'birthdate', 'p_series', 'p_number', 'insurance', 'sms_notification', 'email_notification', )
         read_only_fields = ('username', )
 
 class RegistrationSerializer(serializers.ModelSerializer):
@@ -64,11 +63,10 @@ class LoginSerializer(serializers.Serializer):
 class UserSerializer(serializers.ModelSerializer):
     password = serializers.CharField(max_length=128, min_length=8, write_only=True)
     profile = ProfileSerializer(write_only=True)
-    bio = serializers.CharField(source='profile.bio', read_only=True)
 
     class Meta:
         model = User
-        fields = ('email', 'username', 'password', 'token', 'profile', 'bio', )
+        fields = ('email', 'username', 'password', 'token', 'profile', )
         read_only_fields = ('token', )
 
 
