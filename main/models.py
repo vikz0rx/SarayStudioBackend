@@ -73,7 +73,15 @@ class User(AbstractBaseUser, PermissionsMixin, TimestampedModel):
 
 class Profile(TimestampedModel):
     user = models.OneToOneField('User', on_delete=models.CASCADE)
-    bio = models.TextField(blank=True)
+    firstname = models.CharField(max_length=32, blank=True, null=True)
+    lastname = models.CharField(max_length=32, blank=True, null=True)
+    middlename = models.CharField(max_length=32, blank=True, null=True)
+    birthdate = models.DateField(blank=True, null=True)
+    p_series = models.CharField(max_length=4, blank=True, null=True)
+    p_number = models.CharField(max_length=6, blank=True, null=True)
+    insurance = models.CharField(max_length=11, blank=True, null=True)
+    sms_notification = models.BooleanField(default=True)
+    email_notification = models.BooleanField(default=False)
 
     def __str__(self):
         return self.user.username
