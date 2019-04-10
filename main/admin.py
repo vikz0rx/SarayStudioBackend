@@ -49,3 +49,7 @@ class UserAdmin(admin.ModelAdmin):
                 readonly_fields += ('username', 'email', 'is_superuser', 'is_staff', )
 
         return readonly_fields
+
+@admin.register(Photographs)
+class PhotographsAdmin(admin.ModelAdmin):
+    list_display = ('firstname', 'lastname', 'instagram', 'is_staff')

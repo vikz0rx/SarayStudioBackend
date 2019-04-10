@@ -93,3 +93,18 @@ class Profile(TimestampedModel):
     class Meta:
         verbose_name = 'Пользователь'
         verbose_name_plural = 'Пользователи'
+
+class Photographs(models.Model):
+    firstname = models.CharField(max_length=32, verbose_name='Имя')
+    lastname = models.CharField(max_length=32, verbose_name='Фамилия')
+    instagram = models.URLField(verbose_name='Instagram')
+    bio = models.TextField(verbose_name='Описание')
+    cost = models.PositiveSmallIntegerField(verbose_name='Стоимость услуг')
+    is_staff = models.BooleanField(default=False, verbose_name='Штатный фотограф')
+
+    def __str__(self):
+        return f'{self.firstname} {self.lastname}'
+
+    class Meta:
+        verbose_name = 'Фотограф'
+        verbose_name_plural = 'Фотографы'
