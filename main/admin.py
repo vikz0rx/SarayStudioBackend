@@ -1,5 +1,16 @@
+from PIL import Image
 from django.contrib import admin
 from .models import *
+
+class MultipleImagePhotographsInline(admin.TabularInline):
+    model = MultipleImagePhotographs
+    extra = 4
+
+    def save_model(self, *args, **kwargs):
+       instance = super(MultipleImagePhotographs, self).save(*args, **kwargs)
+       image = Image.open(instance.image.path)
+       image.save(instance.image.path, quality=20, optimize=True)
+       return instance
 
 @admin.register(Profile)
 class ProfileAdmin(admin.ModelAdmin):
@@ -53,3 +64,4 @@ class UserAdmin(admin.ModelAdmin):
 @admin.register(Photographs)
 class PhotographsAdmin(admin.ModelAdmin):
     list_display = ('firstname', 'lastname', 'instagram', 'is_staff')
+    inlines = (MultipleImagePhotographsInline, )

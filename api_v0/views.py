@@ -1,4 +1,4 @@
-from rest_framework import status
+from rest_framework import status, viewsets
 from rest_framework.generics import RetrieveAPIView, RetrieveUpdateAPIView
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
@@ -86,3 +86,12 @@ class ProfileRetrieveAPIView(RetrieveAPIView):
         serializer = self.serializer_class(profile)
 
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+class PhotographsViewSet(viewsets.ReadOnlyModelViewSet):
+    permission_classes = (AllowAny, )
+    queryset = Photographs.objects.all()
+
+    def get_serializer_class(self):
+        if self.action == 'list':
+            return PhotographsPreviewSerializer
+        return PhotographsDetailSerializer

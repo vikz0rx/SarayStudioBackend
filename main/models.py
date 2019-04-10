@@ -108,3 +108,11 @@ class Photographs(models.Model):
     class Meta:
         verbose_name = 'Фотограф'
         verbose_name_plural = 'Фотографы'
+
+class MultipleImagePhotographs(models.Model):
+    relation = models.ForeignKey(Photographs, on_delete=models.CASCADE, verbose_name='Фотограф', related_name='photos')
+    image = models.ImageField(upload_to='photograph', verbose_name='Фотография')
+
+    class Meta:
+        verbose_name = 'Фотография'
+        verbose_name_plural = 'Примеры работ'

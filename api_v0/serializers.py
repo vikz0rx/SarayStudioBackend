@@ -88,3 +88,36 @@ class UserSerializer(serializers.ModelSerializer):
         instance.profile.save()
 
         return instance
+
+class PhotographsExampleSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = MultipleImagePhotographs
+        fields = [
+            'image',
+        ]
+
+class PhotographsPreviewSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Photographs
+        fields = [
+            'id',
+            'firstname',
+            'lastname',
+            'instagram',
+            'url',
+        ]
+
+class PhotographsDetailSerializer(serializers.ModelSerializer):
+    photos_set = PhotographsExampleSerializer(source='photos', many=True, read_only=True)
+
+    class Meta:
+        model = Photographs
+        fields = [
+            'firstname',
+            'lastname',
+            'instagram',
+            'bio',
+            'cost',
+            'is_staff',
+            'photos_set',
+        ]
