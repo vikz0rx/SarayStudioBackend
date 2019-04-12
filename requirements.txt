@@ -3,6 +3,7 @@ chardet==3.0.4
 Django==2.2
 django-appconf==1.0.3
 django-cors-headers==2.5.2
+django-jet==1.0.8
 django-mediumeditor==1.0.0
 djangorestframework==3.9.2
 djangorestframework-jwt==1.11.0
