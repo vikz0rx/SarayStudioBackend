@@ -38,7 +38,7 @@ ROOT_URLCONF = 'SarayStudioBackend.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'main/templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -89,7 +89,7 @@ CORS_ALLOW_METHODS = ('DELETE', 'GET', 'OPTIONS', 'PATCH', 'POST', 'PUT', )
 CORS_ALLOW_CREDENTIALS = True
 CORS_ORIGIN_ALLOW_ALL = True
 
-JET_DEFAULT_THEME = 'default'
+JET_DEFAULT_THEME = 'light-blue'
 JET_SIDE_MENU_COMPACT = True
 
 LANGUAGE_CODE = 'ru-RU'
