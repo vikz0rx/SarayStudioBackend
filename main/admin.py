@@ -63,5 +63,13 @@ class UserAdmin(admin.ModelAdmin):
 
 @admin.register(Photographs)
 class PhotographsAdmin(admin.ModelAdmin):
-    list_display = ('firstname', 'lastname', 'instagram', 'is_staff')
+    list_display = ('firstname', 'lastname', 'instagram', 'is_staff', )
     inlines = (MultipleImagePhotographsInline, )
+
+@admin.register(StuffKind)
+class StuffKindAdmin(admin.ModelAdmin):
+    list_display = ('name', )
+
+@admin.register(Stuff)
+class StuffAdmin(admin.ModelAdmin):
+    list_display = ('kind', 'name', 'cost', 'rent_cost', 'number', )

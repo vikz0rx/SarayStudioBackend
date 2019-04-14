@@ -116,3 +116,29 @@ class MultipleImagePhotographs(models.Model):
     class Meta:
         verbose_name = 'Фотография'
         verbose_name_plural = 'Примеры работ'
+
+class StuffKind(models.Model):
+    name = models.CharField(max_length=64, verbose_name='Название категории')
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = 'Категория оборудования'
+        verbose_name_plural = 'Категории оборудования'
+
+class Stuff(models.Model):
+    kind = models.ForeignKey(StuffKind, on_delete=models.CASCADE, related_name='kind', verbose_name='Категория оборудования')
+    name = models.CharField(max_length=64, verbose_name='Название')
+    description = models.TextField(verbose_name='Описание')
+    cost = models.PositiveSmallIntegerField(verbose_name='Стоимость')
+    rent_cost = models.PositiveSmallIntegerField(verbose_name='Стоимость аренды', default=0)
+    number = models.PositiveSmallIntegerField(verbose_name='Количество', default=1)
+    image = models.ImageField(upload_to='stuff', verbose_name='Изображение')
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = 'Оборудование и другое'
+        verbose_name_plural = 'Оборудование и другое'
