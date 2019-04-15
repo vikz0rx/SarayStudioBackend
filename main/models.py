@@ -94,29 +94,6 @@ class Profile(TimestampedModel):
         verbose_name = 'Пользователь'
         verbose_name_plural = 'Пользователи'
 
-class Photographs(models.Model):
-    firstname = models.CharField(max_length=32, verbose_name='Имя')
-    lastname = models.CharField(max_length=32, verbose_name='Фамилия')
-    instagram = models.URLField(verbose_name='Instagram')
-    bio = models.TextField(verbose_name='Описание')
-    cost = models.PositiveSmallIntegerField(verbose_name='Стоимость услуг')
-    is_staff = models.BooleanField(default=False, verbose_name='Штатный фотограф')
-
-    def __str__(self):
-        return f'{self.firstname} {self.lastname}'
-
-    class Meta:
-        verbose_name = 'Фотограф'
-        verbose_name_plural = 'Фотографы'
-
-class MultipleImagePhotographs(models.Model):
-    relation = models.ForeignKey(Photographs, on_delete=models.CASCADE, verbose_name='Фотограф', related_name='photos')
-    image = models.ImageField(upload_to='photograph', verbose_name='Фотография')
-
-    class Meta:
-        verbose_name = 'Фотография'
-        verbose_name_plural = 'Примеры работ'
-
 class StuffKind(models.Model):
     name = models.CharField(max_length=64, verbose_name='Название категории')
 
@@ -142,3 +119,50 @@ class Stuff(models.Model):
     class Meta:
         verbose_name = 'Оборудование и другое'
         verbose_name_plural = 'Оборудование и другое'
+
+class Photographs(models.Model):
+    firstname = models.CharField(max_length=32, verbose_name='Имя')
+    lastname = models.CharField(max_length=32, verbose_name='Фамилия')
+    instagram = models.URLField(verbose_name='Instagram')
+    bio = models.TextField(verbose_name='Описание')
+    cost = models.PositiveSmallIntegerField(verbose_name='Стоимость услуг')
+    is_staff = models.BooleanField(default=False, verbose_name='Штатный фотограф')
+
+    def __str__(self):
+        return f'{self.firstname} {self.lastname}'
+
+    class Meta:
+        verbose_name = 'Фотограф'
+        verbose_name_plural = 'Фотографы'
+
+class Area(models.Model):
+    name = models.CharField(max_length=32, verbose_name='Название')
+    description = models.TextField(verbose_name='Описание')
+    rent_cost = models.PositiveSmallIntegerField(verbose_name='Стоимость аренды', default=0)
+    tax_weekends = models.PositiveSmallIntegerField(verbose_name='+ Выходные', default=0)
+    tax_latetime = models.PositiveSmallIntegerField(verbose_name='+ Позднее время', default=0)
+    # stuff = models.ManyToManyField(Stuff, blank=True, related_name='stuff', verbose_name='Оборудование')
+    image = models.ImageField(upload_to='areas', verbose_name='Главное изображение')
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = 'Зал и локация'
+        verbose_name_plural = 'Залы и локации'
+
+class MultipleImagePhotographs(models.Model):
+    relation = models.ForeignKey(Photographs, on_delete=models.CASCADE, verbose_name='Фотограф', related_name='photos')
+    image = models.ImageField(upload_to='photograph', verbose_name='Фотография')
+
+    class Meta:
+        verbose_name = 'Фотография'
+        verbose_name_plural = 'Примеры работ'
+
+class MultipleImageAreas(models.Model):
+    relation = models.ForeignKey(Area, on_delete=models.CASCADE, verbose_name='Локация', related_name='photos')
+    image = models.ImageField(upload_to='photograph', verbose_name='Фотография')
+
+    class Meta:
+        verbose_name = 'Фотография'
+        verbose_name_plural = 'Фотографии'
