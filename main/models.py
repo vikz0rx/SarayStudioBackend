@@ -94,6 +94,30 @@ class Profile(TimestampedModel):
         verbose_name = 'Пользователь'
         verbose_name_plural = 'Пользователи'
 
+class BookingTypes(models.Model):
+    name = models.CharField(max_length=64, verbose_name='Название')
+    description = models.TextField(verbose_name='Описание')
+    cost = models.PositiveSmallIntegerField(verbose_name='Стоимость')
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = 'Тип бронирования'
+        verbose_name_plural = 'Бронирования / Типы бронирования'
+
+class BookingOptions(models.Model):
+    name = models.CharField(max_length=64, verbose_name='Название')
+    description = models.TextField(verbose_name='Описание')
+    cost = models.PositiveSmallIntegerField(verbose_name='Стоимость')
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = 'Дополнительная услуга'
+        verbose_name_plural = 'Бронирования / Дополнительные услуги'
+
 class StuffKind(models.Model):
     name = models.CharField(max_length=64, verbose_name='Название категории')
 

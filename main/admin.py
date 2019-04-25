@@ -39,6 +39,14 @@ class ProfileAdmin(admin.ModelAdmin):
 
         return readonly_fields
 
+@admin.register(BookingTypes)
+class BookingTypesAdmin(admin.ModelAdmin):
+    list_display = ('name', )
+
+@admin.register(BookingOptions)
+class BookingOptionsAdmin(admin.ModelAdmin):
+    list_display = ('name', )
+
 @admin.register(User)
 class UserAdmin(admin.ModelAdmin):
     list_display = ('username', 'email', )
