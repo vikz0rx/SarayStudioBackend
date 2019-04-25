@@ -46,7 +46,8 @@ class UserAdmin(admin.ModelAdmin):
         return User.objects.filter(is_staff=True)
 
     def save_model(self, request, obj, form, change):
-        obj.set_password(obj.password)
+        if request.user.password != obj.password:
+            obj.set_password(obj.password)
         obj.save()
 
     def get_exclude(self, request, obj=None):
@@ -77,7 +78,12 @@ class StuffKindAdmin(admin.ModelAdmin):
 
 @admin.register(Stuff)
 class StuffAdmin(admin.ModelAdmin):
-    list_display = ('kind', 'name', 'cost', 'rent_cost', 'number', )
+    def image_tag(self, obj):
+        return format_html('<img style="height: 50px; width: auto;" src="{}" />'.format(obj.image.url))
+
+    image_tag.short_description = ''
+
+    list_display = ('kind', 'name', 'cost', 'rent_cost', 'number', 'image_tag', )
 
 @admin.register(Photographs)
 class PhotographsAdmin(admin.ModelAdmin):
