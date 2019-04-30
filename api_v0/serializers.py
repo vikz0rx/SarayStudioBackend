@@ -96,6 +96,8 @@ class StuffPreviewSerializer(serializers.ModelSerializer):
             'id',
             'name',
             'description',
+            'rent_cost',
+            'image',
         ]
 
 class PhotographsExampleSerializer(serializers.ModelSerializer):
