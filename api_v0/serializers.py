@@ -89,6 +89,15 @@ class UserSerializer(serializers.ModelSerializer):
 
         return instance
 
+class StuffPreviewSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Photographs
+        fields = [
+            'id',
+            'name',
+            'description',
+        ]
+
 class PhotographsExampleSerializer(serializers.ModelSerializer):
     class Meta:
         model = MultipleImagePhotographs

@@ -87,6 +87,13 @@ class ProfileRetrieveAPIView(RetrieveAPIView):
 
         return Response(serializer.data, status=status.HTTP_200_OK)
 
+class StuffViewSet(viewsets.ReadOnlyModelViewSet):
+    permission_classes = (AllowAny, )
+    queryset = Stuff.objects.all()
+
+    def get_serializer_class(self):
+        return StuffPreviewSerializer
+
 class PhotographsViewSet(viewsets.ReadOnlyModelViewSet):
     permission_classes = (AllowAny, )
     queryset = Photographs.objects.all()
