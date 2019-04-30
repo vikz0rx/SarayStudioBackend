@@ -159,6 +159,21 @@ class Photographs(models.Model):
         verbose_name = 'Фотограф'
         verbose_name_plural = 'Фотографы'
 
+class Makeup(models.Model):
+    firstname = models.CharField(max_length=32, verbose_name='Имя')
+    lastname = models.CharField(max_length=32, verbose_name='Фамилия')
+    instagram = models.URLField(verbose_name='Instagram')
+    bio = models.TextField(verbose_name='Описание')
+    cost = models.PositiveSmallIntegerField(verbose_name='Стоимость услуг')
+    is_staff = models.BooleanField(default=False, verbose_name='Штатный визажист')
+
+    def __str__(self):
+        return f'{self.firstname} {self.lastname}'
+
+    class Meta:
+        verbose_name = 'Визажист'
+        verbose_name_plural = 'Визажисты'
+
 class Area(models.Model):
     name = models.CharField(max_length=32, verbose_name='Название')
     description = models.TextField(verbose_name='Описание')
@@ -177,6 +192,14 @@ class Area(models.Model):
 
 class MultipleImagePhotographs(models.Model):
     relation = models.ForeignKey(Photographs, on_delete=models.CASCADE, verbose_name='Фотограф', related_name='photos')
+    image = models.ImageField(upload_to='photograph', verbose_name='Фотография')
+
+    class Meta:
+        verbose_name = 'Фотография'
+        verbose_name_plural = 'Примеры работ'
+
+class MultipleImageMakeup(models.Model):
+    relation = models.ForeignKey(Makeup, on_delete=models.CASCADE, verbose_name='Визажист', related_name='photos')
     image = models.ImageField(upload_to='photograph', verbose_name='Фотография')
 
     class Meta:
