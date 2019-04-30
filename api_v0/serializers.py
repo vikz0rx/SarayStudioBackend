@@ -91,7 +91,7 @@ class UserSerializer(serializers.ModelSerializer):
 
 class StuffPreviewSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Photographs
+        model = Stuff
         fields = [
             'id',
             'name',
