@@ -13,6 +13,16 @@ class MultipleImagePhotographsInline(admin.TabularInline):
        image.save(instance.image.path, quality=20, optimize=True)
        return instance
 
+class MultipleImageMakeupInline(admin.TabularInline):
+    model = MultipleImageMakeup
+    extra = 4
+
+    def save_model(self, *args, **kwargs):
+       instance = super(MultipleImageMakeup, self).save(*args, **kwargs)
+       image = Image.open(instance.image.path)
+       image.save(instance.image.path, quality=20, optimize=True)
+       return instance
+
 class MultipleImageAreasInline(admin.TabularInline):
     model = MultipleImageAreas
     extra = 4
@@ -98,6 +108,11 @@ class StuffAdmin(admin.ModelAdmin):
 class PhotographsAdmin(admin.ModelAdmin):
     list_display = ('firstname', 'lastname', 'instagram', 'is_staff', )
     inlines = (MultipleImagePhotographsInline, )
+
+@admin.register(Makeup)
+class MakeupAdmin(admin.ModelAdmin):
+    list_display = ('firstname', 'lastname', 'instagram', 'is_staff', )
+    inlines = (MultipleImageMakeupInline, )
 
 @admin.register(Area)
 class AreaAdmin(admin.ModelAdmin):
