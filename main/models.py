@@ -165,7 +165,7 @@ class Area(models.Model):
     rent_cost = models.PositiveSmallIntegerField(verbose_name='Стоимость аренды', default=0)
     tax_weekends = models.PositiveSmallIntegerField(verbose_name='+ Выходные', default=0)
     tax_latetime = models.PositiveSmallIntegerField(verbose_name='+ Позднее время', default=0)
-    # stuff = models.ManyToManyField(Stuff, blank=True, related_name='stuff', verbose_name='Оборудование')
+    stuff = models.ManyToManyField(Stuff, blank=True, related_name='stuff', verbose_name='Оборудование')
     image = models.ImageField(upload_to='areas', verbose_name='Главное изображение')
 
     def __str__(self):
