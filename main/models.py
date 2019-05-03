@@ -151,6 +151,7 @@ class Photographs(models.Model):
     bio = models.TextField(verbose_name='Описание')
     cost = models.PositiveSmallIntegerField(verbose_name='Стоимость услуг')
     is_staff = models.BooleanField(default=False, verbose_name='Штатный фотограф')
+    image = models.ImageField(upload_to='photograph', null=True, blank=True, verbose_name='Фотография')
 
     def __str__(self):
         return f'{self.firstname} {self.lastname}'

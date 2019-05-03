@@ -115,6 +115,8 @@ class PhotographsPreviewSerializer(serializers.ModelSerializer):
             'firstname',
             'lastname',
             'instagram',
+            'is_staff',
+            'image',
             'url',
         ]
 
