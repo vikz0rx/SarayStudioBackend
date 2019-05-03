@@ -132,5 +132,6 @@ class PhotographsDetailSerializer(serializers.ModelSerializer):
             'bio',
             'cost',
             'is_staff',
+            'image',
             'photos_set',
         ]
