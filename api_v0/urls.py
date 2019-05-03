@@ -6,6 +6,7 @@ router = DefaultRouter()
 
 router.register(r'stuff', StuffViewSet)
 router.register(r'photographs', PhotographsViewSet)
+router.register(r'makeup', MakeupViewSet)
 
 urlpatterns = router.urls
 
