@@ -89,7 +89,7 @@ class ProfileRetrieveAPIView(RetrieveAPIView):
 
 class StuffViewSet(viewsets.ReadOnlyModelViewSet):
     permission_classes = (AllowAny, )
-    queryset = Stuff.objects.all()
+    queryset = Stuff.objects.order_by('kind')
 
     def get_serializer_class(self):
         return StuffPreviewSerializer
