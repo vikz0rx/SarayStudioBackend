@@ -156,7 +156,7 @@ class MakeupPreviewSerializer(serializers.ModelSerializer):
             'url',
         ]
 
-class PhotographsDetailSerializer(serializers.ModelSerializer):
+class MakeupDetailSerializer(serializers.ModelSerializer):
     photos_set = MakeupExampleSerializer(source='photos', many=True, read_only=True)
 
     class Meta:
