@@ -167,6 +167,7 @@ class Makeup(models.Model):
     bio = models.TextField(verbose_name='Описание')
     cost = models.PositiveSmallIntegerField(verbose_name='Стоимость услуг')
     is_staff = models.BooleanField(default=False, verbose_name='Штатный визажист')
+    image = models.ImageField(upload_to='makeup', null=True, blank=True, verbose_name='Фотография')
 
     def __str__(self):
         return f'{self.firstname} {self.lastname}'
@@ -201,7 +202,7 @@ class MultipleImagePhotographs(models.Model):
 
 class MultipleImageMakeup(models.Model):
     relation = models.ForeignKey(Makeup, on_delete=models.CASCADE, verbose_name='Визажист', related_name='photos')
-    image = models.ImageField(upload_to='photograph', verbose_name='Фотография')
+    image = models.ImageField(upload_to='makeup', verbose_name='Фотография')
 
     class Meta:
         verbose_name = 'Фотография'

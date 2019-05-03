@@ -96,9 +96,18 @@ class StuffViewSet(viewsets.ReadOnlyModelViewSet):
 
 class PhotographsViewSet(viewsets.ReadOnlyModelViewSet):
     permission_classes = (AllowAny, )
-    queryset = Photographs.objects.all()
+    queryset = Photographs.objects.order_by('is_staff')
 
     def get_serializer_class(self):
         if self.action == 'list':
             return PhotographsPreviewSerializer
         return PhotographsDetailSerializer
+
+class MakeupViewSet(viewsets.ReadOnlyModelViewSet):
+    permission_classes = (AllowAny, )
+    queryset = Makeup.objects.order_by('is_staff')
+
+    def get_serializer_class(self):
+        if self.action == 'list':
+            return MakeupPreviewSerializer
+        return MakeupDetailSerializer

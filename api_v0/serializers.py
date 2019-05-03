@@ -135,3 +135,39 @@ class PhotographsDetailSerializer(serializers.ModelSerializer):
             'image',
             'photos_set',
         ]
+
+class MakeupExampleSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = MultipleImageMakeup
+        fields = [
+            'image',
+        ]
+
+class MakeupPreviewSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Makeup
+        fields = [
+            'id',
+            'firstname',
+            'lastname',
+            'instagram',
+            'is_staff',
+            'image',
+            'url',
+        ]
+
+class PhotographsDetailSerializer(serializers.ModelSerializer):
+    photos_set = MakeupExampleSerializer(source='photos', many=True, read_only=True)
+
+    class Meta:
+        model = Makeup
+        fields = [
+            'firstname',
+            'lastname',
+            'instagram',
+            'bio',
+            'cost',
+            'is_staff',
+            'image',
+            'photos_set',
+        ]
