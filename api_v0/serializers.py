@@ -89,6 +89,34 @@ class UserSerializer(serializers.ModelSerializer):
 
         return instance
 
+class NewsPreviewSerializer(serializers.ModelSerializer):
+    author_name = serializers.CharField(source='author.get_short_name')
+
+    class Meta:
+        model = News
+        fields = [
+            'id',
+            'author_name',
+            'title',
+            'image',
+            'created_at',
+            'url',
+        ]
+
+
+class NewsDetailSerializer(serializers.ModelSerializer):
+    author_name = serializers.CharField(source='author.get_short_name')
+
+    class Meta:
+        model = News
+        fields = [
+            'author_name',
+            'title',
+            'text',
+            'image',
+            'created_at',
+        ]
+
 class StuffPreviewSerializer(serializers.ModelSerializer):
     class Meta:
         model = Stuff

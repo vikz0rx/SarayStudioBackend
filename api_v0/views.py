@@ -87,6 +87,15 @@ class ProfileRetrieveAPIView(RetrieveAPIView):
 
         return Response(serializer.data, status=status.HTTP_200_OK)
 
+class NewsViewSet(viewsets.ReadOnlyModelViewSet):
+    permission_classes = (AllowAny, )
+    queryset = News.objects.filter(approved=True)
+
+    def get_serializer_class(self):
+        if self.action == 'list':
+            return NewsPreviewSerializer
+        return NewsDetailSerializer
+
 class StuffViewSet(viewsets.ReadOnlyModelViewSet):
     permission_classes = (AllowAny, )
     queryset = Stuff.objects.order_by('kind')

@@ -20,6 +20,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'main.apps.MainConfig',
     'api_v0',
+    'mediumeditor',
 ]
 
 MIDDLEWARE = [
@@ -91,6 +92,28 @@ CORS_ORIGIN_ALLOW_ALL = True
 
 JET_DEFAULT_THEME = 'light-blue'
 JET_SIDE_MENU_COMPACT = True
+
+MEDIUM_EDITOR_THEME = 'beagle'
+MEDIUM_EDITOR_OPTIONS = {
+    'toolbar': {
+        'static': True,
+        'buttons': [
+            'bold',
+            'italic',
+            'underline',
+            'h2',
+            'h4',
+            'h6',
+        ]
+    },
+    'paste': {
+        'forcePlainText': True,
+        'cleanPastedHTML': False,
+        'cleanReplacements': [],
+        'cleanAttrs': ['class', 'style', 'dir'],
+        'cleanTags': ['meta']
+    }
+}
 
 LANGUAGE_CODE = 'ru-RU'
 TIME_ZONE = 'Asia/Yekaterinburg'

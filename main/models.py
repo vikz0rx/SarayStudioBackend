@@ -94,6 +94,22 @@ class Profile(TimestampedModel):
         verbose_name = 'Пользователь'
         verbose_name_plural = 'Пользователи'
 
+class News(models.Model):
+    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='author', blank = True, null = True, limit_choices_to={'groups__name': 'saray_manager'}, verbose_name='Автор')
+    title = models.CharField(max_length=128, verbose_name='Заголовок')
+    text = models.TextField(max_length=8192, verbose_name='Текст статьи')
+    image = models.FileField(upload_to='news', verbose_name='Обложка')
+    approved = models.BooleanField(default=False, verbose_name='Опубликовано')
+    created_at = models.DateField(auto_now_add=True, verbose_name='Дата')
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        ordering = ('-approved', '-created_at', )
+        verbose_name = 'Новость'
+        verbose_name_plural = 'Новости'
+
 class BookingTypes(models.Model):
     name = models.CharField(max_length=64, verbose_name='Название')
     description = models.TextField(verbose_name='Описание')

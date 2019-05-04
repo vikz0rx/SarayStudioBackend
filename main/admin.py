@@ -1,6 +1,7 @@
 from PIL import Image
 from django.contrib import admin
 from django.utils.html import format_html
+from mediumeditor.admin import MediumEditorAdmin
 from .models import *
 
 class MultipleImagePhotographsInline(admin.TabularInline):
@@ -48,6 +49,47 @@ class ProfileAdmin(admin.ModelAdmin):
                 readonly_fields += ('user', 'firstname', 'lastname', 'middlename', 'birthdate', 'p_series', 'p_number', 'insurance', 'sms_notification', 'email_notification', )
 
         return readonly_fields
+
+@admin.register(News)
+class NewsAdmin(MediumEditorAdmin, admin.ModelAdmin):
+    def image_tag(self, obj):
+        return format_html('<img src="{}" />'.format(obj.image.url))
+    
+    image_tag.short_description = 'Обложка'
+
+    list_display = ('image_tag', 'author', 'title', 'created_at', 'approved', )
+    search_fields = ('title', )
+    mediumeditor_fields = ('text', )
+
+    def get_exclude(self, request, obj=None):
+        exclude = ()
+        if not request.user.is_superuser:
+            exclude += ('author', )
+        
+        return exclude
+
+    def get_readonly_fields(self, request, obj=None):
+        readonly_fields = ()
+        if not request.user.is_superuser:
+            readonly_fields += ('approved', )
+        else:
+            readonly_fields += ('author', )
+
+        if obj:
+            if obj.approved and not request.user.is_superuser:
+                readonly_fields += ('title', 'desc', 'text', 'image', )
+
+        return readonly_fields
+
+    def get_queryset(self, request):
+        if request.user.is_superuser:
+            return News.objects.all()
+        return News.objects.filter(author=request.user)
+
+    def save_model(self, request, obj, form, change):
+        if not change:
+            obj.author = request.user
+        obj.save()
 
 @admin.register(BookingTypes)
 class BookingTypesAdmin(admin.ModelAdmin):
