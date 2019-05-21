@@ -94,6 +94,17 @@ class Profile(TimestampedModel):
         verbose_name = 'Пользователь'
         verbose_name_plural = 'Пользователи'
 
+class Rules(models.Model):
+    title = models.CharField(max_length=128, verbose_name='Заголовок')
+    text = models.TextField(max_length=8192, verbose_name='Правила студии')
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        verbose_name = 'Документ'
+        verbose_name_plural = 'Документы'
+
 class News(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='author', blank = True, null = True, limit_choices_to={'groups__name': 'saray_manager'}, verbose_name='Автор')
     title = models.CharField(max_length=128, verbose_name='Заголовок')

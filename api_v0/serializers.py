@@ -89,6 +89,13 @@ class UserSerializer(serializers.ModelSerializer):
 
         return instance
 
+class RulesSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Rules
+        fields = [
+            'text',
+        ]
+
 class NewsPreviewSerializer(serializers.ModelSerializer):
     author_name = serializers.CharField(source='author.get_short_name')
 

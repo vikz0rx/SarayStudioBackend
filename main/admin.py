@@ -50,6 +50,10 @@ class ProfileAdmin(admin.ModelAdmin):
 
         return readonly_fields
 
+@admin.register(Rules)
+class RulesAdmin(MediumEditorAdmin, admin.ModelAdmin):
+    list_display = ('id', )
+
 @admin.register(News)
 class NewsAdmin(MediumEditorAdmin, admin.ModelAdmin):
     def image_tag(self, obj):
@@ -77,7 +81,7 @@ class NewsAdmin(MediumEditorAdmin, admin.ModelAdmin):
 
         if obj:
             if obj.approved and not request.user.is_superuser:
-                readonly_fields += ('title', 'desc', 'text', 'image', )
+                readonly_fields += ('title', 'text', 'image', )
 
         return readonly_fields
 

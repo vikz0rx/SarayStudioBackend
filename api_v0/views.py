@@ -63,7 +63,7 @@ class LoginAPIView(APIView):
     serializer_class = LoginSerializer
 
     def post(self, request):
-        user = request.data
+        user = request.data.get('user', {})
 
         serializer = self.serializer_class(data=user)
         serializer.is_valid(raise_exception=True)
@@ -86,6 +86,13 @@ class ProfileRetrieveAPIView(RetrieveAPIView):
         serializer = self.serializer_class(profile)
 
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+class RulesViewSet(viewsets.ReadOnlyModelViewSet):
+    permission_classes = (AllowAny, )
+    queryset = Rules.objects.all()
+
+    def get_serializer_class(self):
+        return RulesSerializer
 
 class NewsViewSet(viewsets.ReadOnlyModelViewSet):
     permission_classes = (AllowAny, )
