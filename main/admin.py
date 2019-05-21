@@ -51,7 +51,7 @@ class ProfileAdmin(admin.ModelAdmin):
         return readonly_fields
 
 @admin.register(Rules)
-class RulesAdmin(MediumEditorAdmin, admin.ModelAdmin):
+class RulesAdmin(admin.ModelAdmin):
     list_display = ('id', )
 
 @admin.register(News)
