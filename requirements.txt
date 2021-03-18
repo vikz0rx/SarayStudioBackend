@@ -8,7 +8,7 @@ django-mediumeditor==1.0.0
 djangorestframework==3.9.2
 djangorestframework-jwt==1.11.0
 idna==2.8
-Pillow==6.0.0
+Pillow==8.1.1
 PyJWT==1.7.1
 pytz==2019.1
 requests==2.21.0
