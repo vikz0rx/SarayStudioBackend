@@ -5,7 +5,7 @@ django-appconf==1.0.3
 django-cors-headers==2.5.2
 django-jet==1.0.8
 django-mediumeditor==1.0.0
-djangorestframework==3.9.2
+djangorestframework==3.11.2
 djangorestframework-jwt==1.11.0
 idna==2.8
 Pillow==6.0.0
